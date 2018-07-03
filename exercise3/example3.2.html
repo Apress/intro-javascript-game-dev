@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pacmania</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="drawing.js"></script>
+  </head>
+  <body>
+    <h1>Pac-man</h1>
+    <canvas id="pacmania" width="400" height="400"></canvas>
+    <script>
+      var context = document.getElementById("pacmania").getContext("2d");
+      draw_grid(context);
+      draw_pacman(context, 200, 200, 150, Math.random());
+    </script>
+  </body>
+</html>

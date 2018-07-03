@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Drawing a spaceship</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="drawing.js"></script>
+  </head>
+  <body>
+    <h1>Drawing a spaceship</h1>
+    <canvas id="asteroids" width="400" height="400"></canvas>
+    <script>
+      var context = document.getElementById("asteroids").getContext("2d");
+      draw_grid(context);
+      draw_ship(context, 200, 200, 125, {guide: true});
+      draw_ship(context, 75, 75, 50, {stroke: 'gold', fill: 'purple'});
+      draw_ship(context, 325, 325, 50, {angle: 0.8 * Math.PI, guide: true});
+      draw_ship(context, 75, 325, 50, {angle: 0.3 * Math.PI, guide: true});
+      draw_ship(context, 325, 75, 50, {lineWidth: 8, fill: 'blue'});
+    </script>
+  </body>
+</html>

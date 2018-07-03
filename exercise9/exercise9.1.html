@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Inheritance</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="drawing.js"></script>
+    <script src="objects.js"></script>
+  </head>
+  <body>
+    <h1>Inheritance</h1>
+    <canvas id="asteroids" width="600" height="600"></canvas>
+    <script>
+'use strict';
+var context = document.getElementById("asteroids").getContext("2d");
+
+var mass = new Mass(10, 20, context.canvas.width/2, context.canvas.height/2);
+
+function draw() {
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  draw_grid(context);
+  mass.draw(context);
+}
+
+function update(elapsed) {
+  mass.update(elapsed, context);
+}
+
+var previous;
+function frame(timestamp) {
+  if (!previous) previous = timestamp;
+  var elapsed = timestamp - previous;
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  update(elapsed/1000);
+  draw(context);
+  previous = timestamp;
+  window.requestAnimationFrame(frame);
+}
+window.requestAnimationFrame(frame);
+    </script>
+  </body>
+</html>

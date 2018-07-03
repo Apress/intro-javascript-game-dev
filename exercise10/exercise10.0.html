@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="drawing.js"></script>
+    <script src="objects.js"></script>
+    <title>Pac-Man</title>
+  </head>
+  <body>
+    <h1>Pac-Man</h1>
+    <canvas id="pacman" width="300" height="300"></canvas>
+    <script>
+var context = document.getElementById("pacman").getContext("2d");
+
+var pacman = new PacMan(context.canvas.width / 2, context.canvas.height / 2, 20, 100);
+var ghosts = [
+  new Ghost(context.canvas.width * Math.random(), context.canvas.height * Math.random(), 20, 35, 'red'),
+  new Ghost(context.canvas.width * Math.random(), context.canvas.height * Math.random(), 20, 45, 'pink'),
+  new Ghost(context.canvas.width * Math.random(), context.canvas.height * Math.random(), 20, 55, 'cyan'),
+  new Ghost(context.canvas.width * Math.random(), context.canvas.height * Math.random(), 20, 75, 'orange')
+];
+
+function draw(ctx, guide) {
+  if(guide) {
+    draw_grid(ctx);
+  }
+  pacman.draw(ctx);
+  ghosts.forEach(function(ghost) {
+    ghost.draw(context, guide);
+  });
+}
+
+function update(elapsed) {
+  pacman.update(elapsed, context.canvas.width, context.canvas.height);
+  ghosts.forEach(function(ghost) {
+    ghost.update(pacman, elapsed);
+  });
+}
+
+var previous, elapsed;
+function frame(timestamp) {
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  if (!previous) previous = timestamp;
+  elapsed = timestamp - previous;
+  update(elapsed / 1000);
+  draw(context, true);
+  previous = timestamp;
+  window.requestAnimationFrame(frame);
+}
+window.requestAnimationFrame(frame);
+
+window.onkeydown = function(e) {
+  let key = e.key || e.keyCode;
+  switch(key) {
+    case "ArrowLeft":
+    case 37: // left arrow keyCode
+      pacman.move_left();
+      break;
+    case "ArrowUp":
+    case 38: // up arrow keyCode
+      pacman.move_up();
+      break;
+    case "ArrowRight":
+    case 39: // right arrow keyCode
+      pacman.move_right();
+      break;
+    case "ArrowDown":
+    case 40: // down arrow keyCode
+      pacman.move_down();
+      break;
+  }
+}
+
+    </script>
+  </body>
+</html>

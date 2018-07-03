@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pacmania</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="drawing.js"></script>
+  </head>
+  <body>
+    <h1>Pac-man</h1>
+    <canvas id="pacmania" width="400" height="400"></canvas>
+    <script>
+      var context = document.getElementById("pacmania").getContext("2d");
+      draw_grid(context);
+      context.beginPath();
+      context.arc(200, 200, 150, 0.2 * Math.PI, 1.8 * Math.PI);
+      context.lineTo(200, 200);
+      context.fillStyle = "yellow";
+      context.fill();
+    </script>
+  </body>
+</html>
