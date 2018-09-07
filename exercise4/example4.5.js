@@ -67,7 +67,7 @@ function draw_ship(ctx, radius, options) {
     );
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(radius * curve1 - radius, 0, radius/50, 0, 2 * Math.PI);
+    ctx.arc(-radius * curve1, 0, radius/50, 0, 2 * Math.PI);
     ctx.fill();
   }
   ctx.restore();
